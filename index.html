@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CatsAreCrazy Arcade</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1024;color:white;font-family:Arial,sans-serif;text-align:center}
+header{padding:20px;background:#171d3b;font-size:22px;font-weight:bold}
+header span{color:#67e8f9}
+.hero{padding:45px 15px;background:linear-gradient(135deg,#4c1d95,#172554)}
+h1{font-size:42px;margin:10px}
+.hero p{line-height:1.6}
+button{background:#8b5cf6;color:white;border:0;border-radius:12px;padding:12px 17px;margin:6px;font-size:16px;font-weight:bold;cursor:pointer}
+button:hover{background:#a78bfa}
+section{padding:25px 12px}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;max-width:900px;margin:auto}
+.card{background:#171d38;border:1px solid #37416b;border-radius:18px;padding:20px}
+.emoji{font-size:55px}
+#game{background:#171d38;border-radius:18px;padding:22px;max-width:600px;margin:15px auto}
+#result{color:#fde68a;min-height:28px}
+footer{padding:25px;color:#a8b0d2}
+</style>
+</head>
+<body>
+<header>🐱 CATSARECRAZY <span>ARCADE</span></header>
+<div class="hero">
+<h1>ENTER THE CATVERSE!</h1>
+<p>Big games. Tiny cats. Maximum chaos!</p>
+<button onclick="document.getElementById('games').scrollIntoView()">Explore Games 🎮</button>
+</div>
+<section id="games">
+<h2>🎮 Choose Your Game</h2>
+<div class="games">
+<div class="card"><div class="emoji">🐱</div><h3>Cat Clicker</h3><p>Tap the cat and collect points!</p><button onclick="play('clicker')">Play Now</button></div>
+<div class="card"><div class="emoji">🎲</div><h3>Lucky Number</h3><p>Roll a random number from 1 to 100.</p><button onclick="play('lucky')">Play Now</button></div>
+<div class="card"><div class="emoji">🧠</div><h3>Cat Trivia</h3><p>Test your cat knowledge!</p><button onclick="play('trivia')">Play Now</button></div>
+</div>
+</section>
+<section>
+<h2 id="title">🐾 Cat Clicker</h2>
+<div id="game">
+<div id="content">
+<h3>Score: <span id="score">0</span></h3>
+<button style="font-size:55px" onclick="clickCat()">🐈</button>
+<p>Tap the cat to earn points!</p>
+<button onclick="reset()">Reset Score</button>
+</div>
+<p id="result"></p>
+</div>
+</section>
+<footer>🐱 CatsAreCrazy Arcade · Made for fun!</footer>
+<script>
+let score=0;
+let question=0;
+function clickCat(){
+score++;
+document.getElementById('score').textContent=score;
+document.getElementById('result').textContent='MEOW-NIFICENT! 🐾';
+}
+function reset(){
+score=0;
+document.getElementById('score').textContent=0;
+document.getElementById('result').textContent='Fresh start!';
+}
+function play(game){
+let title=document.getElementById('title');
+let content=document.getElementById('content');
+let result=document.getElementById('result');
+result.textContent='';
+if(game==='clicker'){
+title.textContent='🐾 Cat Clicker';
+content.innerHTML='<h3>Score: <span id="score">'+score+'</span></h3><button style="font-size:55px" onclick="clickCat()">🐈</button><p>Tap the cat to earn points!</p><button onclick="reset()">Reset Score</button>';
+}
+if(game==='lucky'){
+title.textContent='🎲 Lucky Number';
+content.innerHTML='<h3>Try your luck!</h3><button onclick="roll()">Roll Number 🎲</button><h2 id="number">?</h2>';
+}
+if(game==='trivia'){
+title.textContent='🧠 Cat Trivia';
+content.innerHTML='<h3>What is a baby cat called?</h3><button onclick="answer(false)">Puppy</button><button onclick="answer(true)">Kitten</button><button onclick="answer(false)">Calf</button>';
+}
+document.getElementById('game').scrollIntoView({behavior:'smooth'});
+}
+function roll(){
+document.getElementById('number').textContent=Math.floor(Math.random()*100)+1;
+document.getElementById('result').textContent='Roll again and beat your number!';
+}
+function answer(correct){
+document.getElementById('result').textContent=correct?'Correct! A baby cat is a kitten! 🐱':'Not quite! The answer is kitten.';
+}
+</script>
+</body>
+  </html>
+  
